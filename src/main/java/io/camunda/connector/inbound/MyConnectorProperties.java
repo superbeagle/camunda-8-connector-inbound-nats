@@ -8,34 +8,46 @@ import javax.validation.constraints.NotNull;
  * Configuration properties for inbound Connector
  */
 public class MyConnectorProperties {
-  @NotNull
-  private String sender;
 
-  @Max(10)
-  @Min(1)
-  private int messagesPerMinute; // how often should mock subscription will produce messages
+  private String url;
+  private String topic;
+  private String message;
+  private String pollingInterval;
 
-  public String getSender() {
-    return sender;
+  public String getUrl() {
+    return url;
   }
 
-  public void setSender(String sender) {
-    this.sender = sender;
+  public String getTopic() {
+    return topic;
+  }
+  public String getMessage() {
+    return message;
+  }
+  public String getPollingInterval() {
+    return pollingInterval;
   }
 
-  public int getMessagesPerMinute() {
-    return messagesPerMinute;
+  public void setUrl(String url) {
+    this.url = url;
   }
-
-  public void setMessagesPerMinute(int messagesPerMinute) {
-    this.messagesPerMinute = messagesPerMinute;
+  public void setTopic(String topic) {
+    this.topic = topic;
+  }
+  public void setMessage(String message) {
+    this.message = message;
+  }
+  public void setPollingInterval(String pollingInterval) {
+    this.pollingInterval = pollingInterval;
   }
 
   @Override
   public String toString() {
     return "MyConnectorProperties{" +
-        "messageSender='" + sender + '\'' +
-        ", messagesPerMinute=" + messagesPerMinute +
+        "url='" + url + '\'' +
+        "topic='" + topic + '\'' +
+        "message='" + message + '\'' +
+        "polling interval='" + pollingInterval + '\'' +
         '}';
   }
 }

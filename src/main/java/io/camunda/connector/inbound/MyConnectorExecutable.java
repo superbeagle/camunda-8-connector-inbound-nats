@@ -3,22 +3,20 @@ package io.camunda.connector.inbound;
 import io.camunda.connector.api.annotation.InboundConnector;
 import io.camunda.connector.api.inbound.InboundConnectorContext;
 import io.camunda.connector.api.inbound.InboundConnectorExecutable;
-import io.camunda.connector.inbound.subscription.MockSubscription;
-import io.camunda.connector.inbound.subscription.MockSubscriptionEvent;
+import io.camunda.connector.inbound.subscription.NATSSubscription;
+import io.camunda.connector.inbound.subscription.NATSSubscriptionEvent;
 
-@InboundConnector(name = "MYINBOUNDCONNECTOR", type = "io.camunda:mytestinbound:1")
+@InboundConnector(name = "NATSINBOUNDCONNECTOR", type = "io.camunda:natsinbound:1")
 public class MyConnectorExecutable implements InboundConnectorExecutable {
 
-  private MockSubscription subscription;
+  private NATSSubscription subscription;
   private InboundConnectorContext connectorContext;
 
   @Override
   public void activate(InboundConnectorContext connectorContext) {
     MyConnectorProperties props = connectorContext.bindProperties(MyConnectorProperties.class);
     this.connectorContext = connectorContext;
-
-    subscription = new MockSubscription(
-        props.getSender(), props.getMessagesPerMinute(), this::onEvent);
+    subscription = new NATSSubscription(props.getUrl(), props.getTopic(), props.getMessage(), props.getPollingInterval(), this::onEvent);
   }
 
   @Override
@@ -26,7 +24,7 @@ public class MyConnectorExecutable implements InboundConnectorExecutable {
     subscription.stop();
   }
 
-  private void onEvent(MockSubscriptionEvent rawEvent) {
+  private void onEvent(NATSSubscriptionEvent rawEvent) {
     MyConnectorEvent connectorEvent = new MyConnectorEvent(rawEvent);
     connectorContext.correlate(connectorEvent);
   }

@@ -1,19 +1,20 @@
 package io.camunda.connector.inbound;
 
-import io.camunda.connector.inbound.subscription.MockSubscriptionEvent;
+import io.camunda.connector.inbound.subscription.NATSSubscriptionEvent;
+
 import java.util.Objects;
 
 /**
  * Data model of an event produced by the inbound Connector
  */
 public class MyConnectorEvent {
-  private final MockSubscriptionEvent event;
+  private final NATSSubscriptionEvent event;
 
-  public MyConnectorEvent(MockSubscriptionEvent event) {
+  public MyConnectorEvent(NATSSubscriptionEvent event) {
     this.event = event;
   }
 
-  public MockSubscriptionEvent getEvent() {
+  public NATSSubscriptionEvent getEvent() {
     return event;
   }
 

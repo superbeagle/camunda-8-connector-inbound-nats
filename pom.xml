@@ -127,6 +127,13 @@
         </exclusion>
       </exclusions>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/io.nats/jnats -->
+    <dependency>
+      <groupId>io.nats</groupId>
+      <artifactId>jnats</artifactId>
+      <version>2.16.11</version>
+    </dependency>
   </dependencies>
 
   <build>
